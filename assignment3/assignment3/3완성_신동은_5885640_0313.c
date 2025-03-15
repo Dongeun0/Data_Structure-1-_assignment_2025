@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void main() {
+int main() {
 	//문자열을 저장할 배열 선언
 	char n[100];
 

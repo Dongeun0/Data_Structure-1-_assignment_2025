@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void main() {
+int main() {
 	//입력 받을 실수
 	float num;
 	//float 비트 패턴 저장할 변수
