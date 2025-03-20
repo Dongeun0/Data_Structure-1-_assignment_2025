@@ -1,19 +1,19 @@
 /*
-메인 함수 start
-	정수 n, j, i를 선언
+메인 함수 start:
+	정수 n, j, i를 선언:
 	print "정수 n을 입력하세요: "
 	get n
 
-	print "n이하의 소수 : "(입력된 정수 n)
+	print "n이하의 소수 : ", 입력된 정수 n
 
-	for i = 2 to n do
-		for j = 2 to i do
-			if i % j == 0 then
+	for i = 2 to n do:
+		for j = 2 to i do:
+			if i % j == 0 then:
 				out
 			end if
 		end for
-		if i == j then
-			print i
+		if i == j then:
+			print i:
 		end if
 	end for
 end 메인 함수
