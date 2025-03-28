@@ -2,11 +2,14 @@
 #include <stdlib.h>
 
 int main() {
+	//열과 행 선언
 	int a = 2;
 	int b = 2;
+	//2개의 배열 동적 할당
 	int** Arr = (int**)malloc(sizeof(int*)*a);
 	int** arr = (int**)malloc(sizeof(int*)*a);
 
+	//행에 대해 메모리 할당
 	for (int i = 0; i < a; i++) {
 		Arr[i] = (int*)malloc(sizeof(int) * b);
 		arr[i] = (int*)malloc(sizeof(int) * b);
