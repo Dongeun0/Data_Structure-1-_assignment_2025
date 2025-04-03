@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//재귀적 방법-> 점유율 54.55%
 int fibo_rec(int n) {
 	if (n == 0) {
 		return 0;
@@ -13,6 +14,7 @@ int fibo_rec(int n) {
 	}
 }
 
+//순환적 방법-> 점유율 31.82%
 int fibo_itr(int n) {
 	int f_2 = 0;
 	int f_1 = 1;
@@ -33,6 +35,7 @@ int main() {
 	int i;
 	int j = 0;
 
+	//case 수행 후 0을 입력한게 아니면 다시 방법 선택 가능하도록 while문 사용
 	while (1) {
 		printf("피보나치 수열 방법 선택 (1: 재귀적, 2: 순환적, 0: 종료): ");
 		scanf_s("%d", &i);
