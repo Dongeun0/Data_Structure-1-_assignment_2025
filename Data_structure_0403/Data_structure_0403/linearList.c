@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "linearList.h"
@@ -16,23 +16,24 @@ listType* createList(int size) {
 }
 
 elementType readItem(listType* list, int index) {
-	if (index < 0 || index> list->last) {
-		printf("Index error %d in readItem\n", index);
+	if (index < 0 || index > list->last) {
+		fprintf(stderr, "Index error %d in readItem\n", index);
 		return NULL_ITEM;
 	}
 	return list->array[index];
 }
 
 int insertItem(listType* list, int index, elementType item) {
-	if (index < 0 || index> list->last + 1) {
-		printf("Index error %d in readItem\n", index);
-		return NULL_ITEM;
+	if (index < 0 || index >(list->last + 1)) {
+		fprintf(stderr, "Index error %d in readItem\n", index);
+		return -1;
 	}
 	if (index > list->size) {
-		printf("list is full (%d) in readItem\n", index);
-		return NULL_ITEM;
+		fprintf(stderr, "list is full(%d) in readItem\n", index);
+		return -1;
 	}
-	for (int i = list -> last + 1; i > index; i--) {
+
+	for (int i = list->last + 1; i > index; i--) {
 		list->array[i] = list->array[i - 1];
 		list->move++;
 	}
@@ -40,15 +41,29 @@ int insertItem(listType* list, int index, elementType item) {
 	list->last++;
 }
 
+int compare_item(elementType item1, elementType item2) {
+	if (item1.row != item2.row) return (item1.row - item2.row);
+	else return (item1.col - item2.col);
+}
+
+int ordered_insertItem(listType* list, elementType item) {
+	int i;
+
+	for (i = 0; i <= list->last; i++) {
+		if (compare_item(list->array[i], item) <= 0) break;
+	}
+}
+
 elementType deleteItem(listType* list, int index) {
 	elementType r = list->array[index];
 
-	if (index < 0 || index> list->last) {
-		printf("Index error %d in deleteItem\n", index);
+	if (index < 0 || index > list->last) {
+		fprintf(stderr, "Index error %d in deleteItem\n", index);
 		return NULL_ITEM;
 	}
+
 	for (int i = index; i < list->last; i++) {
-		list->array[i]; list->array[i + 1];
+		list->array[i] = list->array[i + 1];
 		list->move++;
 	}
 	list->last--;
@@ -57,14 +72,16 @@ elementType deleteItem(listType* list, int index) {
 }
 
 int printList(listType* list) {
-	prtintf("list: size = %d, last = %d, move = %d\n", list->size, list->last, list->move);
+	printf("List: size = %d, last = %d, move = %d\n\t Items:", list->size, list->last, list->move);
 	for (int i = 0; i <= list->last; i++) {
-		printf("[%d][%d] ", i, list->array[i]);
+		printf(" [%d]{%d, %d, %d} ", i, list->array[i].row,
+										list->array[i].col,
+										list->array[i].val);
 	}
 	printf("\n");
 }
 
-int intList(listType* list) {
+int initList(listType* list) {
 	list->last = -1;
 	list->move = 0;
 }
