@@ -15,6 +15,7 @@ typedef struct ElementType {
 	int col;
 	int val;
 }elementType;
+
 //여러개를 저장할 공간을 만들어주기
 typedef struct ListType {
 	int size;
@@ -23,6 +24,11 @@ typedef struct ListType {
 	elementType* array;
 } listType;
 
+#define Null_Item (elementType) {0, 0}
+typedef struct ElementType {
+	int coef, expo;
+}elementType;
+
 extern listType* createList(int size);
 extern elementType readItem(listType* list, int index);
 extern elementType deleteItem(listType* list, int index);
@@ -30,3 +36,4 @@ extern int insertItem(listType* list, int index, elementType item);
 extern int printList(listType* list);
 extern int initList(listType* list);
 extern int ordered_insertItem(listType* list, elementType);
+extern int destroyList(listType* list);

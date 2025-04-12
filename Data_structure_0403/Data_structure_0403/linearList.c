@@ -15,12 +15,45 @@ listType* createList(int size) {
 	return lptr;
 }
 
+int desrtoyList(listType* list) {
+	free(list->array);
+	free(list);
+}
+
 elementType readItem(listType* list, int index) {
 	if (index < 0 || index > list->last) {
 		fprintf(stderr, "Index error %d in readItem\n", index);
 		return NULL_ITEM;
 	}
 	return list->array[index];
+}
+
+int compare_item(elementType item1, elementType item2) {
+	return(item1.expo = item2.expo);
+}
+
+//Matrix
+//int compare_item(elementType item1, elementType item2) {
+//	if (item1.row != item2.row) return (item1.row - item2.row);
+//	else return (item1.col - item2.col);
+//}
+
+int ordered_insertItem(listType* list, elementType item) {
+	int i, j;
+
+	for (i = 0; i <= list->last; i++) {
+		if (compare_item(list->array[i], item) > 0) break;
+	}
+
+	for (j = list->last + 1; j > i; j--) {
+		list->array[j] = list->array[j - 1];
+		list->move++;
+	}
+	list->array[i] = item;
+	list->last++;
+
+	return 1;
+
 }
 
 int insertItem(listType* list, int index, elementType item) {
@@ -39,19 +72,8 @@ int insertItem(listType* list, int index, elementType item) {
 	}
 	list->array[index] = item;
 	list->last++;
-}
 
-int compare_item(elementType item1, elementType item2) {
-	if (item1.row != item2.row) return (item1.row - item2.row);
-	else return (item1.col - item2.col);
-}
-
-int ordered_insertItem(listType* list, elementType item) {
-	int i;
-
-	for (i = 0; i <= list->last; i++) {
-		if (compare_item(list->array[i], item) <= 0) break;
-	}
+	return 1;
 }
 
 elementType deleteItem(listType* list, int index) {
@@ -71,15 +93,29 @@ elementType deleteItem(listType* list, int index) {
 	return r;
 }
 
+//polynomal
 int printList(listType* list) {
 	printf("List: size = %d, last = %d, move = %d\n\t Items:", list->size, list->last, list->move);
-	for (int i = 0; i <= list->last; i++) {
-		printf(" [%d]{%d, %d, %d} ", i, list->array[i].row,
-										list->array[i].col,
-										list->array[i].val);
+
+	for (int i = list->last; i <= 0; i--) {
+		printf("%dx", i, list->array[i].coef);
+		if (list->array[i].expo != 0) {
+			printf("x^%d", list->array[i].expo);
+		}
+		if(i = 0);
 	}
-	printf("\n");
 }
+
+//matrix
+//int printList(listType* list) {
+//	printf("List: size = %d, last = %d, move = %d\n\t Items:", list->size, list->last, list->move);
+//	for (int i = 0; i <= list->last; i++) {
+//		printf(" [%d]{%d,%d,%d} ", i, list->array[i].row,
+//			list->array[i].col,
+//			list->array[i].val);
+//	}
+//	printf("\n");
+//}
 
 int initList(listType* list) {
 	list->last = -1;
